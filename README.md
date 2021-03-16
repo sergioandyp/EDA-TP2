@@ -9,7 +9,7 @@ a emplear objetos y clases. Por favor no utilicen los recursos de objetos y clas
 ejercicio
 
 • La habitación es rectangular, de largo h y ancho w. El tamaño de la habitación es pasado
-por línea de comandos y es tal que h <= 100 y w <=70.
+por línea de comandos y es tal que w <= 100 y h <=70.
 • El piso está dividido en baldosas de una unidad por una unidad. Las baldosas pueden
 estar limpias o sucias. Inicialmente todo el piso está sucio.
 • Hay n robots limpiando en simultáneo. La cantidad de robots se pasa por línea de
@@ -37,6 +37,7 @@ De esta forma comenzará con n = 1 y continuará iterando hasta que el tiempo
 medio para n y n+1 sea menor a 0.1. Por cada step en n (cada incremento en n)
 se deberán correr 1000 simulaciones para estimar el tiempo medio que demora
 limpiar el piso con dicha cantidad de robots.
+
 Notas:
 • El programa recibe por línea de comandos, el tamaño del piso (Width y Heigh), la
 cantidad de robots (Robots) y el modo de la simulación (Modo).

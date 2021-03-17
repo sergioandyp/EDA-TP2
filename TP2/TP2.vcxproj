@@ -145,7 +145,6 @@
     <ClCompile Include="main.c" />
     <ClCompile Include="robotAll.c" />
     <ClCompile Include="simulacionV2.c" />
-    <ClCompile Include="test.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ej11.h" />

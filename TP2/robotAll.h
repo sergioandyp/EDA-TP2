@@ -1,8 +1,7 @@
 #ifndef ROBOT_ALL_H
 #define ROBOT_ALL_H
 #include <stdbool.h>
-
-// Estas estructura tomarlas de otro lado
+#include "ej11.h"
 
 typedef struct {
 	int width;
@@ -11,8 +10,7 @@ typedef struct {
 } Floor;
 
 typedef struct {
-	double x;
-	double y;
+	Point position;
 	double angle;
 } Robot;
 
@@ -40,7 +38,8 @@ void destroyUI();
 // que se debe encargar de otorgarle un nuevo ángulo a cada robot. La callback debe devolver 0 si 
 // la simulacion debe continuar, y otro valor para detenerla. Si el usuario presiona cualquier tecla
 // o cierra la ventana, la simulacion tambien se detiene.
-void drawRobots(Simulacion* simu, simCallback nextStep);
+// Se devuelve el valor que retorna el callback
+int drawRobots(Simulacion* simu, simCallback nextStep);
 
 // Realiza un grafico de los distintos values en funcion de su posicion en el arreglo
 // para una correcta visualizacion, los valores deben ser no negativos

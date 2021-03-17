@@ -41,8 +41,8 @@ static ALLEGRO_FONT* font = NULL;
 #ifdef TEST
 
 #include <time.h>
-#define TEST_W		20
-#define TEST_H		20
+#define TEST_W		1
+#define TEST_H		2
 #define TEST_NUM	(TEST_W*TEST_H)
 
 int nextStep(Simulacion* simu) {
@@ -80,11 +80,11 @@ int main() {
 	}
 	
 	Floor floor = { TEST_W, TEST_H, tiles };
-	Robot robot[5] = {	{.x = 0.5, .y = 4.0, .angle = 0 },
-						{.x = 4.0, .y = 4.5, .angle = 90 },
-						{.x = 3.5, .y = 4.5, .angle = 180 },
-						{.x = 4.5, .y = 3.5, .angle = 270 },
-						{.x = 2.5, .y = 2.5, .angle = 45 },
+	Robot robot[5] = {	{.x = rand()*(double)TEST_W/RAND_MAX, .y = 4.0, .angle = 0 },
+						{.x = rand() * (double)TEST_W / RAND_MAX, .y = rand() * (double)TEST_H / RAND_MAX, .angle = rand() * 360.0 / RAND_MAX },
+						{.x = rand() * (double)TEST_W / RAND_MAX, .y = rand() * (double)TEST_H / RAND_MAX, .angle = rand() * 360.0 / RAND_MAX },
+						{.x = rand() * (double)TEST_W / RAND_MAX, .y = rand() * (double)TEST_H / RAND_MAX, .angle = rand() * 360.0 / RAND_MAX },
+						{.x = rand() * (double)TEST_W / RAND_MAX, .y = rand() * (double)TEST_H / RAND_MAX, .angle = rand() * 360.0 / RAND_MAX },
 	};
 	Simulacion simu = {
 		.cantRobots = 5,
@@ -121,7 +121,7 @@ int main() {
 
 // Global function Definition
 
-void drawRobots(Simulacion * simu, simCallback nextStep) {
+int drawRobots(Simulacion * simu, simCallback nextStep) {
 
 	timer = al_create_timer(0.5);
 	al_register_event_source(queue, al_get_timer_event_source(timer));
@@ -134,6 +134,7 @@ void drawRobots(Simulacion * simu, simCallback nextStep) {
 	};
 
 	ALLEGRO_EVENT event;
+	int retVal = 0;		// Return value
 	bool redraw = true;
 	bool quit = false;
 	do {
@@ -155,26 +156,24 @@ void drawRobots(Simulacion * simu, simCallback nextStep) {
 			drawFloor(&(simu->floor));
 			for (int i = 0; i < simu->cantRobots; i++) {
 
-				Point orig = { simu->robots[i].x, simu->robots[i].y };
+				Point orig = simu->robots[i].position;
 				Point dest = translatePoint(orig, 1.0, simu->robots[i].angle);
 
-				if (isPointInRect(dest, room)) {	// Si el punto esta dentro del piso
-					simu->robots[i].x = dest.x;			// Asigno la nueva posicion al robot
-					simu->robots[i].y = dest.y;
-				}
-				
 				orig = pointToAll(orig, simu->floor.width, simu->floor.height);
 				dest = pointToAll(dest, simu->floor.width, simu->floor.height);
 				drawArrow(&orig, &dest, al_color_name("black"));	// Robot modelado como flecha
 			}
 			al_flip_display();
-			if (nextStep(simu)) {	// Avanzo un paso en la simulacion
+			retVal = nextStep(simu);
+			if (retVal) {	// Avanzo un paso en la simulacion
 				quit = true;			// Y me fijo si hay que parar la simulacion
 			}
 			redraw = false;
 		}
 
 	} while (!quit);
+
+	return retVal;
 
 }
 

@@ -1,18 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <ctype.h>
-//#include <allegro5/allegro.h>
-//#include <allegro5/allegro_primitives.h>
-//#include <allegro5/allegro_color.h>
-//#include <allegro5/allegro_font.h>
-//#define ALLEGRO_STATICLINK
-//#include "allegro5/allegro.h"
 #include "simulacion.h"
 #include "robotALL.h"
 #include "libparse.h"
 #include "userData.h"
-#include "ej11.h"
 
 #define ON 1
 #define OFF 0
@@ -125,7 +117,7 @@ int Callback(char *key, char *value, void *uData) {
 		if (uD->Flags->height == OFF) {
 			if (isauint(value)) {
 				uD->height = strtol(value, NULL, 10);
-				if ((uD->height > 100) || (uD->height < 1)) {
+				if ((uD->height > 70) || (uD->height < 1)) {
 					printf("Error: Value for key -%s is out of valid range!\n", key);
 					return PARAMS_INVALID;
 				}
@@ -146,7 +138,7 @@ int Callback(char *key, char *value, void *uData) {
 		if (uD->Flags->width == OFF) {
 			if (isauint(value)) {
 				uD->width = strtol(value, NULL, 10);
-				if ((uD->width > 70) || (uD->width < 1)) {
+				if ((uD->width > 100) || (uD->width < 1)) {
 					printf("Error: Value for key -%s is out of valid range!\n", key);
 					return PARAMS_INVALID;
 				}

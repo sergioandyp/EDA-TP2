@@ -60,14 +60,9 @@ int simulacion(int n, int height, int width, bool mode)//mode 1 = false ; mode 2
 					pPiso[(int)pRoomba[j].position.x + (int)pRoomba[j].position.y * width] = 1;
 					baldosas_sucias--;
 				}
-				bool is_in_piso = 0;//spanglish papá
-				//no se si me conviene crear un punto p de prueba para encontrar un punto dentro del rectangulo o7
-				//si me coniene asignarle al robot varias veces valores distintos hasta pegarle
-
 
 				Point newPos = translatePoint((pRoomba + j)->position, 1,pRoomba[j].angle );//(pRoomba + j)->angle = rand() * 360.0 / RAND_MAX
 				if (newPos.x < width && newPos.x > 0 && newPos.y < height && newPos.y > 0) {
-					is_in_piso = 1;
 					pRoomba[j].position = newPos;
 				}
 				else

@@ -309,11 +309,10 @@ static void drawArrow(Point* orig, Point* dest, ALLEGRO_COLOR color) {
 	double angle = getAngleBetweenPoints(*dest, *orig);
 	Point p2 = translatePoint(*dest, 10.0, STANDARD_ANGLE(angle+45.0));
 	Point p3 = translatePoint(*dest, 10.0, STANDARD_ANGLE(angle-45.0));
-	Point pMid = translatePoint(*dest, 5.0, STANDARD_ANGLE(angle));
+	Point pMid = translatePoint(*dest, 5.0, STANDARD_ANGLE(angle));			// Punto entre base y punta de la flecha
 
 	al_draw_line(orig->x, orig->y, pMid.x, pMid.y, color, 5);
 	al_draw_filled_triangle(dest->x, dest->y, p2.x, p2.y, p3.x, p3.y, color);
-	
 
 }
 
